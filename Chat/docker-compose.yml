@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: chatter
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: message_list
+    volumes:
+      - db_data:/var/lib/mysql
+
+
+  app:
+    image: registry.gitlab.com/BlakePeters99/chat:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+     - 5000:5000
+    environment:
+      FLASK_APP: chat.py
+    depends_on:
+      - db
+
+volumes:
+  db_data: {}
