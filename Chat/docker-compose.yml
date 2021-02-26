@@ -14,7 +14,7 @@ services:
 
 
   app:
-    image: registry.gitlab.com/BlakePeters99/chat:latest
+    image: registry.gitlab.com/BlakePeters99/CSCI390A-ChatApp:latest
     build:
       context: .
       dockerfile: Dockerfile
